@@ -1,13 +1,34 @@
-function compteARebours() {
+let timer;
+let tempsSeconde;
+let enCours = true;
+
+function demarrer() {
+  if (!enCours) {
+    return;
+  }
   const temps = document.querySelector("input");
-  const tempsSeconde = parseInt(temps.value);
-  if (isNaN(tempsSeconde) || tempsSeconde <= 0) {
-    alert("Veuillez rentrer un nombre valide");
+  tempsSeconde = parseInt(temps.value);
+  if (tempsSeconde <= 0 || isNaN(tempsSeconde)) {
+    alert("Veuillez entrer un nombre valide");
+  }
+  timer = setInterval(decrementer, 1000);
+  tempsRestant();
+  enCours = false;
+}
+function tempsRestant() {
+  const affichage = document.querySelector("p");
+  affichage.textContent = tempsSeconde;
+}
+function decrementer() {
+  tempsSeconde--;
+  tempsRestant();
+  if (tempsSeconde <= 0) {
+    clearInterval(timer);
   }
 }
 function arreter() {
-  clearInterval(intervalID);
+  clearInterval(timer);
 }
-function reprendreCompteARebours() {
-  intervalID = setInterval(decrementeTemps, 1000);
+function reprendre() {
+  timer = setInterval(decrementer, 1000);
 }
