@@ -24,8 +24,19 @@ ajouter.addEventListener("click", function (e) {
   });
 });
 
-// for (let bouton of boutons) {
-//   bouton.addEventListener("click", function () {
-//     bouton.parentNode.remove();
+// ------- Code avant de mettre la case en place, il fonctionne bien ---------
+
+// let ajouter = document.querySelector("button");
+// let listes = document.querySelector("ul");
+
+// ajouter.addEventListener("click", function (e) {
+//   e.preventDefault();
+//   let taches = document.querySelector("input").value;
+//   let liste = document.createElement("li");
+//   liste.textContent = taches;
+//   listes.appendChild(liste);
+
+//   liste.addEventListener("click", function () {
+//     liste.style.color = "green";
 //   });
-// }
+// });
