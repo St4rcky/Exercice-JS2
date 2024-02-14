@@ -3,6 +3,43 @@ let listes = document.querySelector("ul");
 let deleteAll = document.getElementById("deleteAll");
 let storage = JSON.parse(localStorage.getItem("taches")) || [];
 
+if (storage) {
+  for (let obj of storage) {
+    let liste = document.createElement("li");
+    let texte = document.createElement("p");
+    texte.textContent = obj;
+    listes.appendChild(liste);
+    liste.style.display = "flex";
+    liste.style.alignItems = "center";
+
+    let texteContainer = document.createElement("div");
+    liste.appendChild(texteContainer);
+
+    let caseACocher = document.createElement("input");
+    caseACocher.type = "checkbox";
+    liste.appendChild(caseACocher);
+    liste.appendChild(texte);
+
+    caseACocher.addEventListener("change", function () {
+      if (this.checked) {
+        liste.style.color = "green";
+      } else {
+        liste.style.color = "black";
+      }
+    });
+
+    let deleteButton = document.createElement("button");
+    deleteButton.textContent = `\u00D7`;
+    liste.appendChild(deleteButton);
+
+    deleteButton.addEventListener("click", function () {
+      liste.remove();
+      storage = storage.filter((item) => item !== obj);
+      localStorage.setItem("taches", JSON.stringify(storage));
+    });
+  }
+}
+
 ajouter.addEventListener("click", function (e) {
   e.preventDefault();
   let taches = document.getElementById("nomDeTache").value;
